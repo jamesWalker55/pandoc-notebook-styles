@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14.5px;
+  font-family: "Inter", sans-serif;
+  color: rgb(51, 51, 51);
+  line-height: 1.6;
+  width: auto;
+}
+@media print {
+  html {
+    font-size: 13px;
+  }
+}
+
+body {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  background-color: white;
+}
+@media screen {
+  body {
+    margin-top: 1.5rem;
+  }
+}
+
+p {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+a {
+  color: rgb(63, 96, 178);
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(63, 96, 178);
+  text-decoration: underline;
+}
+
+ul,
+ol {
+  padding-left: 1.5rem;
+}
+
+ul > li::marker {
+  content: "-  ";
+}
+
+img, video {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+li > img, li > video {
+  display: inline;
+}
+
+table {
+  margin: 0 auto;
+  padding: 0.2rem 0.5rem;
+  border-collapse: collapse;
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+  border: 1px solid rgb(213, 213, 213);
+  padding: 0.2rem 0.5rem;
+}
+
+blockquote {
+  color: rgb(75, 75, 75);
+  border-left: 0.2rem solid rgb(213, 213, 213);
+  margin: 0.5rem 0rem;
+  position: relative;
+  padding: 0 1em;
+}
+
+pre:not(.sourceCode), div.sourceCode {
+  color: rgb(75, 75, 75);
+  border-left: 0.2rem solid rgb(213, 213, 213);
+  margin: 0.5rem 0rem;
+  position: relative;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+  line-height: 1.1em;
+  padding: 0.6rem 1rem;
+}
+pre:not(.sourceCode) *, div.sourceCode * {
+  font-family: inherit;
+  line-height: inherit;
+}
+
+code:not(.sourceCode) {
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+}
+
+#title-block-header {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+#title-block-header h1 {
+  margin-bottom: 0.2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  margin-bottom: 0.2rem;
+}
+h1 .header-section-number,
+h2 .header-section-number,
+h3 .header-section-number,
+h4 .header-section-number,
+h5 .header-section-number,
+h6 .header-section-number {
+  font-weight: normal;
+  position: absolute;
+  right: calc(100% + 0.5rem);
+}
+@media print {
+  h1 .header-section-number,
+h2 .header-section-number,
+h3 .header-section-number,
+h4 .header-section-number,
+h5 .header-section-number,
+h6 .header-section-number {
+    position: relative;
+    right: unset;
+  }
+}
+
+#TOC {
+  padding-left: 0.5em;
+  padding-right: 1em;
+}
+@media print {
+  #TOC {
+    display: none;
+  }
+}
+#TOC > ul {
+  padding-left: 3.5em;
+  position: relative;
+}
+#TOC > ul .toc-section-number {
+  opacity: 0.3;
+  font-weight: bold;
+  color: rgb(51, 51, 51);
+  padding: 0 0.2em;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (width < 83rem) {
+  #TOC {
+    background-color: white;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 1.5rem;
+    opacity: 0.3;
+    overflow: hidden;
+    transition-property: max-height, opacity;
+    transition-duration: 0.1s;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #TOC:hover {
+    max-height: 75vh;
+    opacity: 1;
+    overflow-x: auto;
+    overflow-y: scroll;
+  }
+}
+@media (width >= 83rem) {
+  body {
+    position: relative;
+    left: 15rem;
+  }
+
+  #TOC {
+    border-right: 1px solid rgb(51, 51, 51);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 30rem;
+    overflow: auto;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

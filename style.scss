@@ -1,0 +1,327 @@
+// How to use this file
+// 1. make sure SASS is installed
+// 2. `sass --watch style.scss style.css`
+// 3. whenever you edit `style.scss`, it will now automatically update `style.css`
+
+// google fonts
+// Inter, Fira Code
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap');
+
+// variables
+$color-bg-main: white;
+$color-border-block: rgb(213, 213, 213);
+$color-text-main: rgb(51, 51, 51);
+$color-text-anchor: rgb(63, 96, 178);
+$color-text-block: rgb(75, 75, 75);
+$font-main: 'Inter', sans-serif;
+$font-code: 'Fira Code', monospace;
+$font-size-base: 14.5px;
+$font-size-print: 13px;
+$font-size-code: 0.9em;
+$body-padding: 3rem;
+$body-width: 60rem;
+$toc-height: 1.5rem;
+$sidebar-mode-min-width: 83rem;
+$sidebar-width: 30rem;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  font-family: $font-main;
+  color: $color-text-main;
+  line-height: 1.6;
+  width: auto;
+
+  @media print {
+    font-size: $font-size-print;
+  }
+}
+
+body {
+  max-width: $body-width;
+  // center body
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $body-padding;
+  padding-right: $body-padding;
+  background-color: $color-bg-main;
+
+  // add margin to top to accomodate TOC
+  @media screen {
+    margin-top: $toc-height;
+  }
+
+  // // reduce padding when printing
+  // @media print {
+  //   padding-left: $body-padding / 2;
+  //   padding-right: $body-padding / 2;
+  // }
+}
+
+p {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+// =====================Anchors=====================
+
+a {
+  color: $color-text-anchor;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-text-anchor;
+    text-decoration: underline;
+  }
+}
+
+// =====================Lists=====================
+
+// make lists indent less
+ul,
+ol {
+  padding-left: 1.5rem;
+}
+
+ul > li::marker {
+  content: "-  ";
+}
+
+// ===================Images/Videos===================
+
+img, video {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+
+  // images inside lists should be inline
+  li > & {
+    display: inline;
+  }
+}
+
+// ===================Tables===================
+table {
+  margin: 0 auto;
+  padding: 0.2rem 0.5rem;
+  border-collapse: collapse;
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+  border: 1px solid $color-border-block;
+  padding: 0.2rem 0.5rem;
+}
+
+// ===================BLOCK MIXINS===================
+@mixin borderedBlock {
+  // colors
+  color: $color-text-block;
+  // border
+  border-left: 0.2rem solid $color-border-block;
+  // border-radius: 0.2rem;
+  // padding
+  margin: 0.5rem 0rem;
+  // relative so children can use absolute positioning
+  position: relative;
+}
+
+@mixin blockLabel($name) {
+  &::before {
+    content: $name;
+    font-size: 0.8em;
+    font-weight: bold;
+
+    // colors
+    color: $color-border-block;
+    // background-color: $color-bg-main;
+
+    // padding
+    padding: 0em 0.2em;
+
+    // place it at the corner
+    position: absolute;
+    top: 0em;
+    right: calc(100% + 0.5em);
+  }
+}
+
+// ===================blockquote===================
+blockquote {
+  @include borderedBlock;
+  // @include blockLabel("Quote");
+  // padding
+  padding: 0 1em;
+}
+
+// =====================Code=====================
+// code block
+pre:not(.sourceCode), div.sourceCode {
+  @include borderedBlock;
+  // @include blockLabel("Code");
+
+  // text
+  font-family: $font-code;
+  font-size: $font-size-code;
+  line-height: 1.1em;
+
+  // padding
+  padding: 0.6rem 1rem;
+
+  // make children inherit font properties recursively
+  * {
+    font-family: inherit;
+    line-height: inherit;
+  }
+}
+
+// code that isn't in code blocks (inline code)
+code:not(.sourceCode) {
+  font-family: $font-code;
+  font-size: $font-size-code;
+}
+
+// ===================Page title===================
+
+#title-block-header {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  h1 {
+    margin-bottom: 0.2rem;
+  }
+}
+
+// ===================Header===================
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  margin-bottom: 0.2rem;
+
+  // numbered header
+  .header-section-number {
+    font-weight: normal;
+    position: absolute;
+    right: calc(100% + 0.5rem);
+    @media print {
+      position: relative;
+      right: unset
+    }
+  }
+}
+
+// =====================TOC=====================
+// base styling for TOC
+#TOC {
+  // add some padding
+  padding-left: 0.5em;
+  padding-right: 1em;
+
+  // hide when printing
+  @media print {
+    & {
+      display: none;
+    }
+  }
+
+  // hacky shit with section numbers
+  & > ul {
+    // make the root list have more padding
+    padding-left: 3.5em;
+    
+    position: relative;
+
+    .toc-section-number {
+      opacity: 0.3;
+      font-weight: bold;
+      color: $color-text-main;
+      padding: 0 0.2em;
+      position: absolute;
+      left: 0;
+      pointer-events: none;
+      user-select: none;
+      // display: none;
+    }
+  }
+
+  // // remove list bullets
+  // li::marker {
+  //   content: "";
+  // }
+}
+
+// floating-only styling
+@media (width < $sidebar-mode-min-width) {
+  #TOC {
+    // make background solid
+    background-color: $color-bg-main;
+
+    // add a border
+    border-bottom: 1px solid $color-text-main;
+
+    // hover over all other elements
+    z-index: 1;
+
+    // fix to top of screen
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    // hide when mouse not hovering
+    max-height: $toc-height;
+    opacity: 0.3;
+    overflow: hidden;
+    &:hover {
+      max-height: 75vh;
+      opacity: 1;
+
+      // allow scrolling
+      overflow-x: auto;
+      overflow-y: scroll;
+    }
+
+    // add transitions
+    transition-property: max-height, opacity;
+    transition-duration: 0.1s;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+  }
+}
+
+// sidebar-only styling
+@media (width >= $sidebar-mode-min-width) {
+  // offset the body to the right slightly
+  body {
+    position: relative;
+    left: calc($sidebar-width / 2);
+  }
+
+  // lock the TOC to the left
+  #TOC {
+    // add a border
+    border-right: 1px solid $color-text-main;
+
+    // fix to left of screen
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: $sidebar-width;
+
+    // enable scrolling
+    overflow: auto;
+  }
+}
