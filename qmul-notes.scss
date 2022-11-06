@@ -222,6 +222,21 @@ h6 {
   }
 }
 
+.not-examinable {
+  opacity: 0.8;
+  background-color: #eee;
+  position: relative;
+
+  &::before {
+    content: " (not examinable)";
+    font-size: 0.6em;
+    font-weight: normal;
+    position: absolute;
+    width: max-content;
+    right: calc(100% + 1em);
+  }
+}
+
 // =====================TOC=====================
 // base styling for TOC
 #TOC {
