@@ -53,6 +53,14 @@ ul > li::marker {
   content: "-  ";
 }
 
+ul.task-list > li::marker {
+  content: unset;
+}
+ul.task-list > li > input[type=checkbox] {
+  margin-right: 0.5em;
+  margin-left: -1.3em;
+}
+
 img, video {
   display: block;
   margin: 0 auto;
